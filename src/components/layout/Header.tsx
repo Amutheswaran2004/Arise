@@ -1,10 +1,20 @@
 
-import { Bell, User } from 'lucide-react';
+import { Bell, User, Menu } from 'lucide-react';
 
-export function Header() {
+interface HeaderProps {
+    onMenuClick: () => void;
+}
+
+export function Header({ onMenuClick }: HeaderProps) {
     return (
-        <header className="flex h-16 items-center justify-between border-b border-slate-800 bg-slate-900 px-6">
-            <div className="flex items-center">
+        <header className="flex h-16 items-center justify-between border-b border-slate-800 bg-slate-900 px-4 md:px-6">
+            <div className="flex items-center gap-4">
+                <button
+                    onClick={onMenuClick}
+                    className="md:hidden text-slate-400 hover:text-white"
+                >
+                    <Menu className="h-6 w-6" />
+                </button>
                 {/* Placeholder for breadcrumbs or title */}
             </div>
             <div className="flex items-center space-x-4">
@@ -15,7 +25,7 @@ export function Header() {
                     <div className="h-8 w-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-sm font-bold">
                         <User className="h-5 w-5" />
                     </div>
-                    <span className="text-sm font-medium text-slate-200">Aspirant</span>
+                    <span className="text-sm font-medium text-slate-200 hidden md:inline">Aspirant</span>
                 </div>
             </div>
         </header>
