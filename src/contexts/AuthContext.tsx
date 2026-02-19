@@ -12,15 +12,7 @@ interface AuthContextType {
 
 // ... existing code ...
 
-const signInWithGoogle = async () => {
-    try {
-        const result = await signInWithPopup(auth, googleProvider);
-        return result;
-    } catch (error) {
-        console.error("Error signing in with Google", error);
-        throw error;
-    }
-};
+
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -45,9 +37,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return unsubscribe;
     }, []);
 
-    const signInWithGoogle = async () => {
+    const signInWithGoogle = async (): Promise<UserCredential> => {
         try {
-            await signInWithPopup(auth, googleProvider);
+            const result = await signInWithPopup(auth, googleProvider);
+            return result;
         } catch (error) {
             console.error("Error signing in with Google", error);
             throw error;
